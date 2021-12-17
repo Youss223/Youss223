@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact index{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    <h1>Affichage</h1>
+    <hr/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Afficher</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.nom }}</td>
+                <td>{{ contact.prenom }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.adresse }}</td>
+                <td>
+                    <button class="btn btn btn-info"> <a href="{{ path('contact_show', {'id': contact.id}) }}">Afficher</a></button>
+                </td>
+                <td>
+                    <button class="btn btn-success"> <a href="{{ path('contact_edit', {'id': contact.id}) }}">Modifier</a></button>
+                </td>
+                <td>
+                    {{ include('contact/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
